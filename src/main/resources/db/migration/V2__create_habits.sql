@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS habit (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX IF NOT EXISTS idx_habit_user_id ON habit (user_id);
+CREATE INDEX idx_habit_user_id ON habit (user_id);

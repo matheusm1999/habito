@@ -5,6 +5,7 @@ public class HabitRequest {
     private String description;
     private String frequency;
     private Integer target;
+    private Integer version;
 
     public HabitRequest() {}
 
@@ -16,4 +17,6 @@ public class HabitRequest {
     public void setFrequency(String frequency) { this.frequency = frequency; }
     public Integer getTarget() { return target; }
     public void setTarget(Integer target) { this.target = target; }
+    public Integer getVersion() { return version; }
+    public void setVersion(Integer version) { this.version = version; }
 }

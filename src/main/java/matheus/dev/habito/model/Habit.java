@@ -31,6 +31,10 @@ public class Habit {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    @Version
+    @Column(name = "version")
+    private Integer version;
+
     public Habit() {}
 
     @PrePersist
@@ -38,6 +42,7 @@ public class Habit {
         if (this.id == null) this.id = java.util.UUID.randomUUID().toString();
         this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
+        if (this.version == null) this.version = 0;
     }
 
     @PreUpdate
@@ -68,4 +73,6 @@ public class Habit {
     public void setTarget(Integer target) { this.target = target; }
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
+    public Integer getVersion() { return version; }
+    public void setVersion(Integer version) { this.version = version; }
 }

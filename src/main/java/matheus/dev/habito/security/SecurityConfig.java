@@ -28,6 +28,10 @@ public class SecurityConfig {
         if (this.simpleAuthFilter != null) {
             http.addFilterBefore(this.simpleAuthFilter, UsernamePasswordAuthenticationFilter.class);
         }
+
+        // enable basic auth so default user (application.properties) can authenticate
+        http.httpBasic(Customizer.withDefaults());
+
         return http.build();
     }
 }
