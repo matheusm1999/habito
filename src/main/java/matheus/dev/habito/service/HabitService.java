@@ -21,11 +21,15 @@ public class HabitService {
         if (req.getName() == null || req.getName().trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do hábito não pode ser vazio");
         }
+        String trimmed = req.getName().trim();
+        if (trimmed.length() > 255) {
+            throw new IllegalArgumentException("Nome do hábito não pode exceder 255 caracteres");
+        }
         if (req.getTarget() != null && req.getTarget() < 0) {
             throw new IllegalArgumentException("Target deve ser maior ou igual a 0");
         }
         Integer target = req.getTarget() == null ? 0 : req.getTarget();
-        Habit h = new Habit(null, userId, req.getName().trim(), req.getDescription(), req.getFrequency(), target);
+        Habit h = new Habit(null, userId, trimmed, req.getDescription(), req.getFrequency(), target);
         Habit saved = repository.save(h);
         return toResponse(saved);
     }
@@ -38,6 +42,10 @@ public class HabitService {
         if (req.getName() == null || req.getName().trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do hábito não pode ser vazio");
         }
+        String trimmed = req.getName().trim();
+        if (trimmed.length() > 255) {
+            throw new IllegalArgumentException("Nome do hábito não pode exceder 255 caracteres");
+        }
         if (req.getTarget() != null && req.getTarget() < 0) {
             throw new IllegalArgumentException("Target deve ser maior ou igual a 0");
         }
@@ -49,7 +57,7 @@ public class HabitService {
             throw new matheus.dev.habito.exception.VersionConflictException("Versão conflitante, recarregue e tente novamente");
         }
         // apply updates
-        h.setName(req.getName().trim());
+        h.setName(trimmed);
         h.setDescription(req.getDescription());
         h.setFrequency(req.getFrequency());
         Integer target = req.getTarget() == null ? h.getTarget() : req.getTarget();

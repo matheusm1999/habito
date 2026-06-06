@@ -58,24 +58,18 @@ Corrigir falhas encontradas.
 
 ### Etapa 4
 
-Acionar o agente "QA" ao finalizar a implementação para obter o feedback sobre o que foi implementado e as melhorias sugeridas.
+- Acionar o agente "QA" ao finalizar a implementação para obter o feedback sobre o que foi implementado e as melhorias sugeridas.
+- Analisar feedback recebido.
+- Implementar melhorias sugeridas pelo agente "QA".
 
 ### Etapa 5
-
-Analisar feedback recebido.
-
-### Etapa 6
-
-Aplicar correções necessárias.
-
-### Etapa 7
 
 Executar novamente:
 
 - Build
 - Testes
 
-### Etapa 8
+### Etapa 6
 
 - Preparar resumo técnico da implementação.
 - Preparar commit message seguindo o padrão conventional commits.
