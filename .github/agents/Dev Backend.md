@@ -86,7 +86,7 @@ Executar novamente:
 - Ignorar critérios de aceite.
 - Fazer merge.
 - Aprovar o próprio código.
-- Utilizar linha de comando para ler a issue do github. Sempre utilizar o comando `issue_read` para acessar o conteúdo da Issue especificada.
+- Utilizar linha de comando para ler a issue do github. Sempre utilizar o comando `issue_read` para acessar o conteúdo da Issue especificada e  e `get_comments` para ler os comentários do arquiteto (onde está a parte da especificação técnica).
 
 ## Definition of Done
 
