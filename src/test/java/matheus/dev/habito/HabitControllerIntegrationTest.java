@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import org.springframework.http.MediaType;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,30 +28,31 @@ public class HabitControllerIntegrationTest {
 
     @BeforeEach
     public void setup() {
-        this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).apply(springSecurity()).build();
     }
 
     @Test
     public void createAndListHabits() throws Exception {
         HabitRequest req = new HabitRequest();
-        req.setUserId("user-1");
         req.setName("Beber água");
         req.setDescription("Beber 2 litros de água");
         req.setFrequency("DAILY");
-        req.setGoal(1);
+        req.setTarget(1);
 
-        String body = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(req);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
+        String body = mapper.writeValueAsString(req);
 
-        String res = mvc.perform(post("/api/habits").contentType(MediaType.APPLICATION_JSON).content(body))
+        String res = mvc.perform(post("/api/habits").header("Authorization","Bearer user-1").contentType(MediaType.APPLICATION_JSON).content(body))
                 .andExpect(status().isCreated())
                 .andReturn().getResponse().getContentAsString();
 
-        HabitResponse created = new com.fasterxml.jackson.databind.ObjectMapper().readValue(res, HabitResponse.class);
+        HabitResponse created = mapper.readValue(res, HabitResponse.class);
         assertThat(created.getId()).isNotNull();
         assertThat(created.getName()).isEqualTo(req.getName());
 
-        String listRes = mvc.perform(get("/api/habits?userId=user-1")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        HabitResponse[] arr = new com.fasterxml.jackson.databind.ObjectMapper().readValue(listRes, HabitResponse[].class);
+        String listRes = mvc.perform(get("/api/habits").header("Authorization","Bearer user-1")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        HabitResponse[] arr = mapper.readValue(listRes, HabitResponse[].class);
         assertThat(arr).hasSize(1);
         assertThat(arr[0].getName()).isEqualTo(req.getName());
     }
