@@ -24,7 +24,8 @@ public class HabitService {
         if (req.getTarget() != null && req.getTarget() < 0) {
             throw new IllegalArgumentException("Target deve ser maior ou igual a 0");
         }
-        Habit h = new Habit(null, userId, req.getName().trim(), req.getDescription(), req.getFrequency(), req.getTarget());
+        Integer target = req.getTarget() == null ? 0 : req.getTarget();
+        Habit h = new Habit(null, userId, req.getName().trim(), req.getDescription(), req.getFrequency(), target);
         Habit saved = repository.save(h);
         return toResponse(saved);
     }
@@ -34,6 +35,6 @@ public class HabitService {
     }
 
     private HabitResponse toResponse(Habit h) {
-        return new HabitResponse(h.getId(), h.getUserId(), h.getName(), h.getDescription(), h.getFrequency(), h.getTarget(), h.getCreatedAt());
+        return new HabitResponse(h.getId(), h.getUserId(), h.getName(), h.getDescription(), h.getFrequency(), h.getTarget(), h.getCreatedAt(), h.getUpdatedAt());
     }
 }

@@ -10,10 +10,11 @@ public class HabitResponse {
     private String frequency;
     private Integer target;
     private Instant createdAt;
+    private Instant updatedAt;
 
     public HabitResponse() {}
 
-    public HabitResponse(String id, String userId, String name, String description, String frequency, Integer target, Instant createdAt) {
+    public HabitResponse(String id, String userId, String name, String description, String frequency, Integer target, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -21,6 +22,7 @@ public class HabitResponse {
         this.frequency = frequency;
         this.target = target;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getId() { return id; }
@@ -37,4 +39,6 @@ public class HabitResponse {
     public void setTarget(Integer target) { this.target = target; }
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+    public Instant getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
 }

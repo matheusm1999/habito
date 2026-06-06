@@ -22,7 +22,7 @@ public class Habit {
     @Column(nullable = false, length = 50)
     private String frequency;
 
-    @Column(name = "target")
+    @Column(name = "target", nullable = false)
     private Integer target;
 
     @Column(name = "created_at")
