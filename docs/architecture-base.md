@@ -72,4 +72,3 @@ The current domain is centered on:
 - habit creation and editing
 - daily completion tracking
 - weekly dashboard metrics
-
